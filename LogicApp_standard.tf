@@ -2,6 +2,7 @@ provider "azurerm" {
   features {}
 }
 
+/*
 resource "azurerm_resource_group" "example" {
   name     = "azure-functions-test-rg"
   location = "West Europe"
@@ -41,3 +42,4 @@ resource "azurerm_logic_app_standard" "example" {
     "WEBSITE_NODE_DEFAULT_VERSION" = "~18"
   }
 }
+*/
