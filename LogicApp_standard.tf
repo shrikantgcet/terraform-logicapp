@@ -15,6 +15,7 @@ resource "azurerm_storage_account" "example" {
   account_replication_type = "LRS"
 }
 
+/*
 resource "azurerm_app_service_plan" "example" {
   name                = "azure-functions-test-service-plan"
   location            = azurerm_resource_group.example.location
@@ -41,3 +42,4 @@ resource "azurerm_logic_app_standard" "example" {
     "WEBSITE_NODE_DEFAULT_VERSION" = "~18"
   }
 }
+*/
