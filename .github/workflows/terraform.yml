@@ -46,7 +46,7 @@ jobs:
         terraform_version: 1.5.5
         terraform_wrapper: false
 
-      name: Terraform Init
+    - name: Terraform Init
       run: |
         terraform init \
           -backend-config="resource_group_name=$BACKEND_RESOURCE_GROUP_NAME" \
