@@ -24,6 +24,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
+        working-directory: "terraform"
         run: |
           terraform init \
             -backend-config="resource_group_name=terraform" \
