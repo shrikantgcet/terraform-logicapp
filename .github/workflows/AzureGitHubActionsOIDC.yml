@@ -19,3 +19,14 @@ jobs:
         run: |
           az account show
           az group list
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: |
+          terraform init \
+            -backend-config="resource_group_name=terraform" \
+            -backend-config="storage_account_name=terraform006" \
+            -backend-config="container_name=la-state-file" 
+    
