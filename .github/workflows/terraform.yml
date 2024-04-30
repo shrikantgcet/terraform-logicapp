@@ -1,9 +1,5 @@
 name: Azure Terraform
 
-permissions:
-      id-token: write
-      contents: read
-
 on:
   push:
     branches:
@@ -32,12 +28,6 @@ jobs:
       resource_group_name: ${{ steps.apply.outputs.resource_group_name }}
       function_name: ${{ steps.apply.outputs.function_name }}
     steps:
-    - name: 'Az CLI login'
-      uses: azure/login@v1
-      with:
-        client-id: ${{ secrets.ARM_CLIENT_ID }}
-        tenant-id: ${{ secrets.ARM_TENANT_ID }}
-        subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
     - uses: actions/checkout@v3
 
     - name: Setup Terraform
@@ -46,15 +36,16 @@ jobs:
         terraform_version: 1.5.5
         terraform_wrapper: false
 
-    - id: init
-      name: Terraform Init
+    - name: Terraform Init
+      id: init
+      run: terraform init
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_USE_OIDC: true
       working-directory: ${{ env.TERRAFORM_WORKING_DIRECTORY }}
-      run: |
-        terraform init \
-          -backend-config="resource_group_name=$BACKEND_RESOURCE_GROUP_NAME" \
-          -backend-config="storage_account_name=$BACKEND_STORAGE_ACCOUNT_NAME" \
-          -backend-config="container_name=$BACKEND_STORAGE_CONTAINER_NAME" \
-        echo 'Terraform Init completed successfully'
+        
     - id: plan
       name: Terraform Plan
       working-directory: ${{ env.TERRAFORM_WORKING_DIRECTORY }}
