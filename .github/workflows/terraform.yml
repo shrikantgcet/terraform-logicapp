@@ -73,7 +73,11 @@ jobs:
         echo $resource_group_name
         resource_group_name=$(terraform output -raw resource_group_name)
         echo 'Terraform Plan completed successfully'
-
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_USE_OIDC: true
 
   Terraform-Deploy-Pipeline:
     runs-on: ubuntu-latest
