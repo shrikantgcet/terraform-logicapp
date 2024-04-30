@@ -19,6 +19,9 @@ env:
   BACKEND_STORAGE_ACCOUNT_NAME: ${{ vars.BACKEND_STORAGE_ACCOUNT_NAME }}
   BACKEND_STORAGE_CONTAINER_NAME: ${{ vars.BACKEND_STORAGE_CONTAINER_NAME }}
   
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
 
@@ -30,6 +33,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Log in to Azure using OIDC
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.ARM_CLIENT_ID }}
+        tenant-id: ${{ secrets.ARM_TENANT_ID }}
+        subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
