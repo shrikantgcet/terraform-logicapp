@@ -112,6 +112,6 @@ jobs:
           -backend-config="key=$TF_BACKEND_KEY"
         
         #terraform apply --auto-approve
-        terraform destroy --auto-approve # this is required if we have to delete any resource
+         terraform destroy --auto-approve # this is required if we have to delete any resource
         
         echo 'Terraform Plan completed successfully'
