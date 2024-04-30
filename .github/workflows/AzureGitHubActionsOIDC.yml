@@ -14,7 +14,7 @@ jobs:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  
+      - uses: actions/checkout@v3
       - name: 'Run az commands'
         run: |
           az account show
