@@ -87,7 +87,6 @@ jobs:
       resource_group_name: ${{ steps.apply.outputs.resource_group_name }}
       function_name: ${{ steps.apply.outputs.function_name }}
     steps:
-    - uses: actions/checkout@v3
     - id: apply
       name: Terraform apply
       env:
