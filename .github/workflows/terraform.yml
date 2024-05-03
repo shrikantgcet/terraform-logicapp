@@ -115,3 +115,4 @@ jobs:
          terraform destroy --auto-approve # this is required if we have to delete any resource
         
         echo 'Terraform Plan completed successfully'
+        
